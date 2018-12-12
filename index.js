@@ -29,6 +29,24 @@ const ACTION_DEC = {
     type: 'DECREMENT'
 };
 
+// "Action Creators"
+// When you need to configure an action, write a function
+const incrementCounter = (id) => {
+    return {
+        ...ACTION_INC,
+        id
+    }
+};
+// example: store.dispatch(incrementCounter('abc-123-do-re-me'))
+
+const decrementCounter = (id) => {
+    return {
+        ...ACTION_DEC,
+        id
+    }
+};
+// example: store.dispatch(decrementCounter('abc-123-do-re-me'))
+
 // #3 - Write a pure function that accepts the current state and an action, then returns the new version state
 
 const counter = (state=defaultState, action) => {
