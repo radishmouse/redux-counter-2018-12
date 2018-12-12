@@ -78,10 +78,26 @@ const counter = (state=defaultState, action) => {
 
         case ACTION_DEC.type:
         // if it's 'DECREMENT', return a new state object with the count - 1
+            // return {
+            //     count: state.count - 1
+            // };
             return {
-                count: state.count - 1
+                // count: state.count + 1
+                // we want to return the array of counters
+                // but we want to modify the one where its id === action.id
+                counters: state.counters.map(oneCounter => {
+                    if (oneCounter.id === action.id) {
+                        // return a new version of oneCounter
+                        return {
+                            ...oneCounter,
+                            count: oneCounter.count - 1
+                        }
+                    } else {
+                        // these are not the droids i'm looking for
+                        return oneCounter;
+                    }
+                })
             };
-
         default:
         // else return the state as-is
             return state;
@@ -94,11 +110,13 @@ const store = createStore(counter);
 // You can subscribe to notifications of any changes to the state
 store.subscribe(() => {
     const theState = store.getState();
-    console.log(`The state is now: ${theState.count}`);
+    console.log(`The state is now: ${theState.counters}`);
 });
 
 module.exports = {
     store,
+    incrementCounter,
+    decrementCounter,
     ACTION_INC,
     ACTION_DEC
 };
