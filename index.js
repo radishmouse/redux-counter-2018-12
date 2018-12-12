@@ -110,7 +110,8 @@ const store = createStore(counter);
 // You can subscribe to notifications of any changes to the state
 store.subscribe(() => {
     const theState = store.getState();
-    console.log(`The state is now: ${theState.counters}`);
+    console.log(`The state is now`);
+    console.log(theState);
 });
 
 module.exports = {
